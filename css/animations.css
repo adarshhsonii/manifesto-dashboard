@@ -1,0 +1,603 @@
+/**
+ * MP Manifesto Dashboard · Premium Animation Layer
+ */
+
+/* ═══════ KEYFRAMES ═══════ */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(40px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeSlideLeft {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.7) rotate(-4deg); }
+  70%  { transform: scale(1.06) rotate(1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--glow, rgba(37,99,235,0)); }
+  50%       { box-shadow: 0 0 0 14px var(--glow, rgba(37,99,235,0)); }
+}
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes spinGlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes orbFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(30px, -20px) scale(1.08); }
+  66%  { transform: translate(-20px, 15px) scale(0.94); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+@keyframes cardShine {
+  0%   { left: -70%; }
+  100% { left: 140%; }
+}
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.8); opacity: 0.4; }
+}
+@keyframes heroParticle {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+  100% { transform: translateY(-120vh) rotate(720deg); opacity: 0; }
+}
+@keyframes morphBlob {
+  0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+@keyframes statCountUp {
+  from { opacity: 0; transform: translateY(12px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes tableRowIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes chipPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  70%  { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+@keyframes heatmapCell {
+  from { opacity: 0; transform: scale(0.4) rotate(5deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes scrollGradient {
+  0%   { background-position: 0% 0%; }
+  50%  { background-position: 0% 100%; }
+  100% { background-position: 0% 0%; }
+}
+@keyframes skeletonWave {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes numberTick {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes drawerSlideIn {
+  from { transform: translateX(100%) scale(0.96); opacity: 0; }
+  to   { transform: translateX(0) scale(1); opacity: 1; }
+}
+@keyframes bnc2 {
+  0%, 80%, 100% { translate: 0 0; }
+  90%           { translate: 0 -7px; }
+}
+
+/* ═══════ HERO FLOATING ORBS ═══════ */
+
+.hero { isolation: isolate; }
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+  mix-blend-mode: screen;
+  animation: orbFloat 12s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-orb:nth-child(1) {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(251,191,36,.35) 0%, transparent 70%);
+  top: -80px; right: 10%;
+  animation-duration: 11s;
+}
+.hero-orb:nth-child(2) {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(20,184,166,.3) 0%, transparent 70%);
+  bottom: 80px; left: 5%;
+  animation-duration: 14s;
+  animation-delay: -5s;
+}
+.hero-orb:nth-child(3) {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(37,99,235,.25) 0%, transparent 70%);
+  top: 30%; left: 35%;
+  animation-duration: 17s;
+  animation-delay: -9s;
+}
+
+/* ═══════ KPI CARD ENHANCEMENTS ═══════ */
+
+.k {
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s !important;
+}
+.k:hover:not(.tilt) {
+  transform: translateY(-10px) scale(1.02) !important;
+  box-shadow:
+    0 24px 50px color-mix(in srgb, var(--c) 30%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent) !important;
+}
+.k:hover .v {
+  animation: statCountUp 0.4s ease both;
+  filter: brightness(1.1);
+}
+.k.on {
+  --glow: color-mix(in srgb, var(--c) 35%, transparent);
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+/* Shimmer on progress bars */
+.k .bar i {
+  transition: width 1.4s cubic-bezier(0.16,1,0.3,1) !important;
+  position: relative;
+  overflow: hidden;
+}
+.k .bar i::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+  animation: shimmer 2s ease infinite;
+  background-size: 400px 100%;
+}
+
+/* ═══════ CARD HOVER SHINE ═══════ */
+
+.card {
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.3s !important;
+}
+.card:hover::after {
+  animation: cardShine 0.75s ease forwards !important;
+}
+
+/* Enhanced card entrance with blur */
+.card.rv {
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  filter: blur(4px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2,0.8,0.2,1),
+    transform 0.7s cubic-bezier(0.2,0.8,0.2,1),
+    filter 0.7s ease,
+    box-shadow 0.35s ease !important;
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+.card.rv.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* ═══════ SECTION HEADINGS ═══════ */
+
+.sec.rv {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2,0.8,0.2,1);
+}
+.sec.rv.in {
+  opacity: 1;
+  transform: none;
+}
+.sec h2::before {
+  transform-origin: top;
+  transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1) !important;
+  transform: scaleY(0);
+}
+.sec.in h2::before {
+  transform: scaleY(1);
+}
+
+/* ═══════ FILTER CHIPS ═══════ */
+
+.chip {
+  transition:
+    transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
+    background 0.25s,
+    box-shadow 0.3s,
+    color 0.2s !important;
+}
+.chip:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+.chip.on {
+  animation: chipPop 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+
+/* ═══════ SPOTLIGHT CAROUSEL ═══════ */
+
+.card.sp, .sp {
+  transition: transform 0.3s ease, box-shadow 0.4s ease !important;
+  overflow: hidden;
+}
+.sp::before {
+  content: '';
+  position: absolute !important;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(251,191,36,.15) 0%,
+    rgba(20,184,166,.1) 30%,
+    rgba(37,99,235,.12) 60%,
+    rgba(251,191,36,.15) 100%
+  );
+  top: -150px; right: -150px;
+  animation: spinGlow 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  display: block !important;
+}
+.sp > * { position: relative; z-index: 1; }
+
+/* ═══════ DRAWER SPRING ═══════ */
+
+.dr {
+  transition: transform 0.52s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.ovl {
+  transition: opacity 0.4s ease, backdrop-filter 0.4s ease !important;
+  backdrop-filter: blur(0);
+}
+.ovl.on { backdrop-filter: blur(8px); }
+
+/* ═══════ HEATMAP CELLS ═══════ */
+
+.hm .ce {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.34,1.56,0.64,1) !important;
+  transform-origin: center;
+}
+.hm .ce:not(.in) {
+  opacity: 0;
+  transform: scale(0.5) rotate(8deg);
+}
+.hm .ce.in {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+.hm .ce:hover {
+  transform: scale(1.25) !important;
+  z-index: 5;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+}
+
+/* ═══════ TABLE ROW ENTRANCE ═══════ */
+
+tbody tr {
+  animation: tableRowIn 0.42s cubic-bezier(0.2,0.8,0.2,1) both;
+}
+tbody tr:nth-child(1)  { animation-delay: 0.03s; }
+tbody tr:nth-child(2)  { animation-delay: 0.07s; }
+tbody tr:nth-child(3)  { animation-delay: 0.11s; }
+tbody tr:nth-child(4)  { animation-delay: 0.15s; }
+tbody tr:nth-child(5)  { animation-delay: 0.19s; }
+tbody tr:nth-child(6)  { animation-delay: 0.23s; }
+tbody tr:nth-child(7)  { animation-delay: 0.27s; }
+tbody tr:nth-child(8)  { animation-delay: 0.31s; }
+tbody tr:nth-child(9)  { animation-delay: 0.35s; }
+tbody tr:nth-child(10) { animation-delay: 0.39s; }
+tbody tr:nth-child(11) { animation-delay: 0.43s; }
+tbody tr:nth-child(12) { animation-delay: 0.47s; }
+
+tbody tr {
+  transition: background 0.2s, transform 0.25s ease !important;
+}
+tbody tr:hover {
+  transform: translateX(6px);
+  background: color-mix(in srgb, var(--pr) 7%, var(--sf)) !important;
+}
+
+/* ═══════ PROGRESS RING ═══════ */
+
+#rg {
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1) !important;
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--ac) 60%, transparent));
+}
+
+/* ═══════ RING CONTAINER FLOAT ═══════ */
+
+.ringc {
+  animation: zi 1.1s 0.3s cubic-bezier(0.2,0.8,0.2,1) both, floatY 6s 2s ease-in-out infinite !important;
+  box-shadow:
+    0 24px 70px rgba(0,0,0,0.25),
+    0 0 60px color-mix(in srgb, var(--ac) 20%, transparent),
+    inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+
+/* ═══════ BACK-TO-TOP BUTTON ═══════ */
+
+#bt::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: inherit;
+  opacity: 0.35;
+  filter: blur(10px);
+  z-index: -1;
+}
+#bt.on::before {
+  animation: glowPulse 2s ease-in-out infinite;
+  --glow: color-mix(in srgb, var(--pr) 45%, transparent);
+}
+
+/* ═══════ STATUS BADGE DOTS ═══════ */
+
+.bd:before {
+  animation: dotPulse 2.2s ease-in-out infinite !important;
+}
+
+/* ═══════ INSIGHT CARDS ═══════ */
+
+.ins .card {
+  transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease !important;
+}
+.ins .card:hover {
+  transform: translateY(-8px) translateX(5px) !important;
+}
+
+/* ═══════ TICKER ITEMS ═══════ */
+
+.tk span {
+  transition: background 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s !important;
+}
+.tk span:hover {
+  transform: translateY(-4px) scale(1.06) !important;
+  background: rgba(255,255,255,0.25) !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+}
+
+/* ═══════ SEARCH FOCUS GLOW ═══════ */
+
+.fb input:focus, .fb select:focus {
+  animation: glowPulse 1.5s ease-in-out 1;
+  --glow: color-mix(in srgb, var(--pr) 30%, transparent);
+}
+
+/* ═══════ SCROLL PROGRESS ═══════ */
+
+#sp {
+  background: linear-gradient(
+    90deg,
+    #f59e0b, #ef4444, #8b5cf6, #14b8a6, #2563eb, #f59e0b
+  ) !important;
+  background-size: 300% 100% !important;
+  animation: shimmer 4s linear infinite !important;
+  height: 5px !important;
+  box-shadow: 0 0 12px rgba(245,158,11,0.5) !important;
+}
+
+/* ═══════ LOGO HOVER ═══════ */
+
+.logo i {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.logo:hover i {
+  transform: scale(1.3) rotate(-10deg);
+}
+
+/* ═══════ FOOTER LINKS ═══════ */
+
+footer a {
+  transition: color 0.3s, letter-spacing 0.3s !important;
+}
+footer a:hover {
+  color: #fde047 !important;
+  letter-spacing: 0.05em;
+}
+
+/* ═══════ CHART CANVAS ═══════ */
+
+.card .cv canvas {
+  animation: fadeSlideUp 0.9s cubic-bezier(0.2,0.8,0.2,1) both;
+  animation-delay: 0.2s;
+}
+
+/* ═══════ THEME SWITCH FLASH ═══════ */
+
+html.theme-switching {
+  transition: filter 0.3s ease;
+  filter: blur(2px) brightness(0.9) !important;
+}
+
+/* ═══════ CLICK EFFECTS & TACTILE ACTIVE STATES ═══════ */
+
+/* Tactile Click Press Compression on interactive elements */
+.btn:active,
+.chip:active,
+.nav a:active,
+.k:active,
+#th:active,
+.pg button:active,
+.sp_p:active,
+.sp_n:active,
+#bt:active,
+.hm .r:active,
+tbody tr:active {
+  transform: scale(0.95) !important;
+  transition: transform 0.08s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+/* Click Shockwave Ring */
+.click-fx-ring {
+  position: fixed;
+  border-radius: 50%;
+  border: 2px solid var(--fx-c, var(--pr));
+  background: radial-gradient(circle, color-mix(in srgb, var(--fx-c, var(--pr)) 20%, transparent) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  animation: clickRingExpand 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes clickRingExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+    border-width: 3px;
+  }
+  60% {
+    opacity: 0.7;
+    border-width: 2px;
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    border-width: 1px;
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+/* Click Particle Sparkles */
+.click-fx-particle {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  animation: clickParticleFly 0.6s cubic-bezier(0.2, 0.9, 0.4, 1) forwards;
+}
+
+@keyframes clickParticleFly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(0);
+  }
+}
+
+/* Table Row Click Feedback */
+tbody tr.row-clicked {
+  animation: clickRowPulse 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+  position: relative;
+}
+
+@keyframes clickRowPulse {
+  0% {
+    background: color-mix(in srgb, var(--pr) 25%, transparent) !important;
+    transform: scale(0.99);
+  }
+  50% {
+    background: color-mix(in srgb, var(--pr) 15%, transparent) !important;
+    transform: scale(1.008);
+  }
+  100% {
+    background: transparent;
+    transform: scale(1);
+  }
+}
+
+/* Button & Card Click Pop */
+.click-pop {
+  animation: clickPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes clickPop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(0.92); }
+  65%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Theme Button Click Spin */
+#th.th-spin {
+  animation: themeBtnSpin 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes themeBtnSpin {
+  0%   { transform: scale(1) rotate(0deg); }
+  50%  { transform: scale(1.22) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+/* Back to Top Launch Bounce */
+#bt.bt-launch {
+  animation: rocketLaunch 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes rocketLaunch {
+  0%   { transform: translateY(0) scale(1); }
+  40%  { transform: translateY(-16px) scale(1.15); box-shadow: 0 16px 24px var(--pr); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* Heatmap Row Click Pulse */
+.hm .r.hm-clicked {
+  animation: hmClickPulse 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes hmClickPulse {
+  0%   { transform: scale(0.98); }
+  50%  { transform: scale(1.02); filter: brightness(1.2); }
+  100% { transform: scale(1); filter: none; }
+}
+
+/* Spotlight arrows click bounce */
+.sp_p.arrow-clicked {
+  animation: arrowLeftKick 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+.sp_n.arrow-clicked {
+  animation: arrowRightKick 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+@keyframes arrowLeftKick {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(-6px) scale(1.12); }
+  100% { transform: translateX(0) scale(1); }
+}
+@keyframes arrowRightKick {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(6px) scale(1.12); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+/* ═══════ REDUCED MOTION ═══════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb, .ringc, #bt.on, .bd:before,
+  .k .bar i::after, .sp::before { animation: none !important; }
+  .card.rv, .sec.rv { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+  tbody tr { animation: none !important; }
+  .hm .ce:not(.in) { opacity: 1 !important; transform: none !important; }
+  .click-fx-ring, .click-fx-particle, tbody tr.row-clicked,
+  #th.th-spin, #bt.bt-launch, .sp_p.arrow-clicked, .sp_n.arrow-clicked,
+  .click-pop, .hm .r.hm-clicked { animation: none !important; }
+}
+

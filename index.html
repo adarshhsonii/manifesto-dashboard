@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hi" data-theme="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>MP Manifesto Dashboard · मध्य प्रदेश संकल्प-पत्र ट्रैकर</title>
+    <meta
+      name="description"
+      content="मध्य प्रदेश विधानसभा चुनाव 2023 संकल्प-पत्र के सभी 414 वादों का स्थिति-वार व प्रमाण-आधारित विश्लेषण ट्रैकर।"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+  </head>
+  <body>
+    <!-- Top Scroll Reading Progress -->
+    <div id="sp"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <nav>
+      <div class="w">
+        <div class="logo"><i></i>MP Manifesto Dashboard</div>
+        <div class="lk">
+          <a href="#ov">Overview</a>
+          <a href="#an">Analytics</a>
+          <a href="#in">Insights</a>
+          <a href="#ex">All Promises</a>
+        </div>
+        <span class="nsp"></span>
+        <button class="tg" id="th" aria-label="Toggle theme">🟠 Orange</button>
+      </div>
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="hero" id="ov">
+      <!-- Floating ambient orbs -->
+      <div class="hero-orb" aria-hidden="true"></div>
+      <div class="hero-orb" aria-hidden="true"></div>
+      <div class="hero-orb" aria-hidden="true"></div>
+      <div class="w g">
+        <div>
+          <span class="eb"><b></b>Madhya Pradesh · 2023 Sankalp Patra</span>
+          <h1 style="margin-bottom: 26px; line-height: 1.25;">मध्य प्रदेश संकल्प पत्र 2023<br><em>घोषणा ट्रैकिंग डैशबोर्ड</em></h1>
+          <a class="btn b1" href="#ex">Explore all promises</a>
+        </div>
+
+        <div class="ringc">
+          <div class="ring">
+            <svg width="190" height="190" viewBox="0 0 190 190">
+              <circle cx="95" cy="95" r="80" fill="none" stroke="#ffffff22" stroke-width="14" />
+              <circle
+                id="rg"
+                cx="95"
+                cy="95"
+                r="80"
+                fill="none"
+                stroke="url(#gd)"
+                stroke-width="14"
+                stroke-linecap="round"
+                stroke-dasharray="502.65"
+                stroke-dashoffset="502.65"
+                style="transition: stroke-dashoffset 1.4s cubic-bezier(0.2, 0.8, 0.2, 1)"
+              />
+              <defs>
+                <linearGradient id="gd">
+                  <stop offset="0" stop-color="#fbbf24" />
+                  <stop offset="1" stop-color="#34d399" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="c">
+              <b id="rv">0%</b>
+              <span>Fulfilment rate</span>
+            </div>
+          </div>
+          <small id="rs"></small>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="w">
+      <!-- KPI Metric Cards Grid -->
+      <section class="kp" id="kp"></section>
+
+      <!-- Filter Controls Toolbar -->
+      <div class="fb" id="fb">
+        <input
+          id="q"
+          type="search"
+          placeholder="खोजें: वादा, विभाग, क्रमांक… / Search"
+          aria-label="Search promises"
+        />
+        <select id="cs" aria-label="Category"></select>
+        <select id="ds" aria-label="Department"><option value="">विभाग: सभी / All departments</option></select>
+        <select id="is" aria-label="Political importance">
+          <option value="">राजनीतिक महत्व: सभी</option>
+          <option>उच्च</option>
+          <option>मध्यम</option>
+          <option>सीमित</option>
+        </select>
+        <button class="chip" id="clr">✕ Clear all</button>
+        <span class="rc" id="rc"></span>
+      </div>
+
+      <!-- Analytics Section -->
+      <div class="sec" id="an">
+        <h2>Analytics</h2>
+      </div>
+
+      <section class="gr">
+        <!-- Status Donut Chart -->
+        <div class="card c4 rv">
+          <h2>Status distribution</h2>
+          <p class="sub">स्थिति-वार वादे (exclusive status)</p>
+          <div class="cv">
+            <canvas id="c1"></canvas>
+            <div class="dc">
+              <b id="dt">0</b>
+              <span>promises</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Stacked Bar Chart -->
+        <div class="card c8 rv" style="--i: 1">
+          <h2>Promises by category</h2>
+          <p class="sub">श्रेणी-वार स्थिति · बार पर क्लिक = श्रेणी फ़िल्टर</p>
+          <div class="cv">
+            <canvas id="c2"></canvas>
+          </div>
+        </div>
+
+        <!-- Department Load Horizontal Bar Chart -->
+        <div class="card c7 rv">
+          <h2>Department load</h2>
+          <p class="sub">शीर्ष 10 विभाग (पहला उल्लिखित विभाग गिना गया)</p>
+          <div class="cv t">
+            <canvas id="c3"></canvas>
+          </div>
+        </div>
+
+        <!-- Evidence Coverage Metric & Chart -->
+        <div class="card c5 rv" style="--i: 1">
+          <h2>Evidence coverage</h2>
+          <p class="sub">कम से कम एक संदर्भ-लिंक वाले वादे</p>
+          <div id="ev"></div>
+          <div class="cv" style="height: 230px; margin-top: 10px">
+            <canvas id="c4"></canvas>
+          </div>
+        </div>
+
+        <!-- Category x Status Heatmap -->
+        <div class="card c12 rv">
+          <h2>Category × Status heatmap</h2>
+          <p class="sub">हर पंक्ति में उस श्रेणी के वादों का प्रतिशत · संख्या कोष्ठक के बाहर</p>
+          <div class="hm" id="hm"></div>
+        </div>
+      </section>
+
+      <!-- Spotlight Carousel -->
+      <section class="card sp" id="spl" aria-live="polite">
+        <div class="spn" id="spn"></div>
+        <div class="spb" id="spb"></div>
+        <div class="spc">
+          <button id="sp_p" aria-label="Previous spotlight">←</button>
+          <button id="sp_n" aria-label="Next spotlight">→</button>
+        </div>
+        <i class="spt"></i>
+      </section>
+
+      <!-- Rule-Based Key Insights -->
+      <div class="sec" id="in">
+        <h2>Key data insights</h2>
+      </div>
+      <section class="ins" id="ins"></section>
+
+      <!-- Promise Explorer Table -->
+      <div class="sec" id="ex">
+        <h2>Promise explorer</h2>
+      </div>
+      <section class="card">
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>वादा / Promise</th>
+                <th class="hide-s">विभाग</th>
+                <th class="hide-s">श्रेणी</th>
+                <th>स्थिति</th>
+                <th>स्रोत</th>
+              </tr>
+            </thead>
+            <tbody id="tb"></tbody>
+          </table>
+        </div>
+        <div class="pg">
+          <span id="pi"></span>
+          <span>
+            <button id="pp">← Prev</button>
+            <button id="pn">Next →</button>
+          </span>
+        </div>
+      </section>
+    </main>
+
+
+    <!-- Back to Top Button -->
+    <button id="bt" aria-label="Back to top">↑</button>
+
+    <!-- Slide-out Detail Drawer Modal & Backdrop -->
+    <div class="ov" id="ovl"></div>
+    <aside class="dr" id="dr" aria-hidden="true" role="dialog"></aside>
+
+    <!-- Vendor Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+    <!-- Application Data & Logic -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
